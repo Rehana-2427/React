@@ -59,7 +59,7 @@ React stands out among other frontend libraries/frameworks because of the follow
 
 
 
-What is JSX ?
+- What is JSX?
 
 JSX stands for JavaScript XML.(JavaScript + XML )
 
@@ -71,7 +71,9 @@ Makes it easier to visualize and create UI layouts by blending HTML structure an
 
 JSX syntax closely resembles HTML but is embedded within JavaScript code.
 
-Differences between HTML and JSX?
+
+
+- Differences between HTML and JSX ?
 
 Example:
     In HTML :   <ul>
@@ -88,5 +90,32 @@ Example:
                                     <li>Home</li>
                                      <li>About</li>
                                     </ul>)
+
+
+
+
+- JSX Syntax & Expressions ?
+
+      JSX Syntax Basics:   In JSX, elements are written similarly to HTML . JSX syntax closely mirrors HTML with some essential differences and rules
+      Case 1 : Basic syntax 
+               const element = <h1> Hi Hello Basic syntax of JSX <.h1>
+      Case 2 : Parent elements 
+               const element = (<div>
+                                    <h1>parent JSX</h1>
+                                    <ul>
+                                          <li>Home</li>
+                                          <li>About</li>
+                                    </ul>
+                                 </div> )
+      Case 3 : Self - closing tags 
+               const element = <img src="/image" alt="jsx-image" />
+         
+- JSX Events & User Interaction
+- JSX Conditional Rendering
+- JSX Lists & Keys
+- JSX Forms & Controlled Components
+- JSX Styling (Inline & CSS)
+- JSX Children and Props
+- JSX Best Practices
 
 
