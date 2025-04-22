@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //creating div element
+        const container = document.createElement("div")
+
+        //creating h1 tag
+        const heading = document.createElement("h1");
+        //enter text 
+        heading.textContent = "List";
+        //append child - means <div><h1>List</h1></div> adding h1 tag in div tag
+        container.appendChild(heading);
+
+
+        //create list - ul
+        const list = document.createElement("ul");
+
+        // list items
+        const items = ["Home","About","Services","Contact"]
+
+        //adding list items one by one uisng forEach loop in ul
+        items.forEach((item)=>{
+            //creating list under ul 
+            const listItem = document.createElement("li");
+            //added list item one by one
+            listItem.textContent= item;
+            // here append list in ul
+            list.appendChild(listItem);
+        })
+        
+        //ul append in container
+        container.appendChild(list);
+
+        //append container in body tag 
+        document.body.appendChild(container)
+    </script>
+</body>
+</html>
