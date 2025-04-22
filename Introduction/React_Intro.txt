@@ -109,9 +109,24 @@ Example:
                                  </div> )
       Case 3 : Self - closing tags 
                const element = <img src="/image" alt="jsx-image" />
-         
+   JSX Expression :
+         JSX allows you to embed any JavaScript expression by using curly braces {}.
+         Example : const name = "Rehana";
+                   const greeting = <h1>Hi {name} </h1>
+
+         Example : const firstName = "Rehana"
+                  const LastName = "Shaik"
+                  function formater(user){
+                                 retrun user.firstName+' '+user.LastName;
+                  }
+                   const fullname = <h1>Hello {formater(user)}</h1>
+
+
+
+
 - JSX Events & User Interaction
 - JSX Conditional Rendering
+      JavaScript expressions also allow conditional rendering in JSX:
 - JSX Lists & Keys
 - JSX Forms & Controlled Components
 - JSX Styling (Inline & CSS)
