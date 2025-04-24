@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX practice</title>
+    <!-- react cdn link -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel cdn link for compiling the jsx code into normal javascript code that browser understands -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- css link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const Welcome = (props) => {
+            return <h4>{props.message}</h4>
+
+        }
+
+        const Test = () => {
+
+            const name = "Rehana"
+            const user = {
+                firstName: "Rehana",
+                lastName: "Shaik"
+            }
+
+            function formatterName(user) {
+                return user.firstName + " " + user.lastName;
+            }
+            const handleButton = () => {
+                console.log("Button clicked!!!")
+            }
+
+            let age = 15;
+
+
+            const fruits = ["Apple", "Banana", "Dragon", "Mango"]
+
+            const [fruitsList, setFruitsList] = React.useState(["Apple", "Banana", "Dragon", "Mango"])
+
+            const inputRef = React.useRef();
+
+            const addFruit = () => {
+                const newFRuit = inputRef.current.value.trim();
+                if (newFRuit) {
+                    setFruitsList([...fruitsList, newFRuit])
+                    inputRef.current.value = "";
+                }
+            }
+            return (
+                <div>
+                    <h1>JSX - Javascript + XML</h1>
+                    <br />
+
+                    <h4>JSX Expression - we use curly braces {"{}"} for jsx Expressions</h4>
+                    <p>Example 1 : </p>
+                    <p>Hi , Good Morning {name}</p>
+                    <br />
+                    <p>Example 2:</p>
+                    <p> My fullName is {formatterName(user)}</p>
+
+                    <br /> <br />
+
+                    <h4> JSX Events & User Interaction</h4>
+                    <button onClick={handleButton}>Clic Me!!</button>
+
+                    <br /> <br />
+                    <h4>JSX Conditional Rendering</h4>
+                    <p>Age : {age}-{age >= 18 ? "eligibile" : "not eligibile"}</p>
+
+                    <br /> <br />
+                    <h4>JSX Lists & Keys</h4>
+
+                    <ol>
+                        {fruits.map((fruit, index) => (
+                            <li key={index}>{fruit}</li>
+                        ))}
+                    </ol>
+
+                    <br /> <br />
+                    <h4>JSX Forms & Controlled Components</h4>
+                    <ul>
+                        {fruitsList.map((fruit, index) => (
+                            <li key={index}>{fruit}</li>
+                        ))}
+                    </ul>
+                    <input type='text' placeholder="enter fruit name" ref={inputRef} />
+                    <button onClick={addFruit}>Add Fruit</button>
+                    <br /><br />
+                    <h4>JSX Props</h4>
+                    <Welcome message={"hello" + ' ' + name} />
+                </div>
+            )
+
+
+        }
+        const root = ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<Test />)
+    </script>
+</body>
+
+</html>

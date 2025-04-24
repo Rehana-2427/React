@@ -1,0 +1,102 @@
+
+---
+
+### **npm vs npx**
+
+---
+
+
+
+### **What is npm?**(package Management and version Management)
+
+- **npm** stands for **Node Package Manager**. It is the default package manager for Node.js.
+- Written entirely in JavaScript and developed by **Isaac Z. Schlueter**, it was initially released on **January 12, 2010**.
+- A **package manager** used to install, update, and manage dependencies.
+
+#### **Key Features:**
+- You **must install packages** before you can use them.
+  > This requires managing disk space and tracking installed package versions.
+- Installs packages **locally or globally**:
+  - Global installs are convenient but can cause **version conflicts** between projects.
+- Maintains:
+  - `package.json` (to list dependencies)
+  - `package-lock.json` (to lock dependency versions)
+- Provides **scripts** to automate tasks (e.g., build, test).
+- Allows developers to **publish** packages to the npm registry.
+
+#### **Common Commands:**
+
+npm -v                      # Check npm version
+npm install <package_name>  # Install the required package locally
+npm install -g <package>    # Install package globally
+npm run build               # Create an optimized build of your app
+```
+
+#### **Example (Global Installation):**
+
+npm install -g create-react-app
+create-react-app myApp
+```
+
+---
+
+### **What is npx?**
+
+- **npx** stands for **Node Package Execute**.
+- Introduced in **npm version 5.2.0**.
+- It runs a package **directly** without installing it, making it ideal for **one-time use** commands.
+
+#### **Key Use Cases:**
+- Useful when you **don’t want to install** a package globally.
+- Great for **testing CLI tools** temporarily.
+- Helps save **disk space** and avoid **polluting global scope**.
+
+#### **Common Command:**
+
+npx <package_name>          # Executes a package without installing it
+```
+
+#### **Examples:**
+
+npx create-react-app myApp  # Create a React app without globally installing CRA(create Readymade react project)
+
+
+npx cowsay "Wow! Correct this sentence!"  # Use cowsay without installing it
+
+
+---
+
+ using npm how can we create react project manually without using CRA(create-react-app) command? 
+
+step 1 : firstly , we need to initialize node package manager 
+ npm init  (or)  npm init -y (here -y means yes)---> creates package.json file 
+
+{
+  "name": "react_setup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
+
+step 2 : installing react and react-DOM libraries 
+    npm i react react-dom 
+
+    (it creates node_modules folder and package-lock.json during the processes of installing react and react-DOM libraries npm creates)
+
+    node_modules-> all dependencies that are inter dependent or inter linked with react and react-DOM will be there .
+
+    package-lock.json -> all dependencies are locked here with basic information of all dependencies (name,version , integrity ,license , engines )
+                            integrity locks the dependencies (if any one changes any thing it throws error )
+
+    npm i (it install all dependencies if any thing deleted)
+
+step 3 : create public folder(index.html)
+         create src folder (index.js)
+
+
+    

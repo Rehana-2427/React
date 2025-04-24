@@ -1,5 +1,9 @@
 # React Introduction------------------------------------## 🔰 **1. Introduction to React & Environment Setup**---------------------------
 
+- What is React?
+- Why React?
+
+
 ### ✅ What is React?
 
 - **React** is a **JavaScript library** used for building **user interfaces**, especially for **single-page applications (SPAs)**.
