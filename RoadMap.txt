@@ -22,7 +22,7 @@ Awesome! Here's a **complete and logically structured React learning roadmap** t
 - npm vs npx
 - What is Babel? JSX to JS transformation
 - What is Webpack? Bundler & Loaders
-- Creating React Apps with `create-react-app` and Vite
+- Creating React Apps with `create-react-app`
 - Directory structure of a React project
 
 ---
