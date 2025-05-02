@@ -1,0 +1,12 @@
+## 🧩 **4. Class Components (Legacy but useful)**
+- State in Class Components
+- Async nature of `setState`
+- Lifecycle Methods:
+  - `constructor`
+  - `componentDidMount`
+  - `componentDidUpdate`
+  - `componentWillUnmount`
+
+---
+
+

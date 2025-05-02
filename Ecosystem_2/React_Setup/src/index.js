@@ -1,6 +1,6 @@
-import React  from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
-import "./style.css"
+import "./style.css";
 
 const heading = React.createElement("h1",{id:'title',className:"container"},"Intrdouction to react")
 
