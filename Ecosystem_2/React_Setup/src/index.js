@@ -8,5 +8,6 @@ const rootELe =ReactDOM.createRoot(document.getElementById("root"))
 
 rootELe.render(heading)
 
+console.log(heading)
 
 //React + ReactDOM + our code (src code) ==> bundle.js

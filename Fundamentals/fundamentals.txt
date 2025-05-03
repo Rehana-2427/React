@@ -1,0 +1,8 @@
+## 🧠 **3. React Fundamentals**
+- React Elements vs DOM Elements
+- Virtual DOM vs Real DOM
+- Diffing Algorithm & Reconciliation
+- Importance of `key` attribute in lists
+- Component Types: Functional vs Class Components
+- Props & PropTypes
+- Component Composition and Reusability

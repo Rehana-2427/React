@@ -1,0 +1,126 @@
+- Component Types: Functional vs Class Components
+- Props & PropTypes
+- Component Composition and Reusability
+
+
+
+📦 What is a Component in React?
+
+components are like JavaScript functions. They accept arbitrary inputs (called “props”) 
+and return React elements describing what should appear on the screen.
+A component is a reusable piece of code in React that returns some UI (User Interface).
+
+It can be small (like a button) or big (like a whole page).
+
+Think of it like building blocks — you build your app by combining many small blocks (components).
+
+Example:
+Navbar, Footer, LoginForm, HomePage — all can be components!
+
+Navbar.jsx - 	Contains only the Navbar UI and logic (example: logo, menu links)
+Footer.jsx -	Contains only the Footer UI and logic (example: copyright, links)
+Content.jsx -	Contains only the Main content (example: welcome text, images)
+Home.js	- Combines all three components together to build the full Home page
+
+📁 Folder Structure Example
+
+src/
+ ├── components/
+ │     ├── Navbar.jsx
+ │     ├── Footer.jsx
+ │     └── Content.jsx
+ └── pages/
+       └── Home.js
+
+⚡ How it works?
+
+1. Navbar.jsx
+import React from 'react';
+
+function Navbar() {
+  return (
+    <nav>
+      <h1>My Website</h1>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+  );
+}
+
+export default Navbar;
+
+2. Content.jsx
+
+import React from 'react';
+
+function Content() {
+  return (
+    <main>
+      <h2>Welcome to the Home Page!</h2>
+      <p>This is the main content area.</p>
+    </main>
+  );
+}
+
+export default Content;
+
+3. Footer.jsx
+
+import React from 'react';
+
+function Footer() {
+  return (
+    <footer>
+      <p>© 2025 My Website. All rights reserved.</p>
+    </footer>
+  );
+}
+
+export default Footer;
+
+4. Home.js
+
+import React from 'react';
+import Navbar from '../components/Navbar';
+import Content from '../components/Content';
+import Footer from '../components/Footer';
+
+function Home() {
+  return (
+    <>
+      <Navbar />
+      <Content />
+      <Footer />
+    </>
+  );
+}
+
+export default Home;
+
+
+You split big page (Home) into small reusable components (Navbar, Content, Footer).
+
+Each component is separate for better organization and maintenance.
+
+Home.js just calls/imports these smaller pieces and renders them together.
+
+This is called Component-Based Architecture 
+
+
+✅ Benefits:
+
+✅ Reusability — Write once, use anywhere.
+✅ Separation of Concerns — Each component does one thing (example: Navbar only handles navigation).
+✅ Maintainability — Easy to find and fix bugs because everything is organized.
+✅ Scalability — You can easily add more features by adding more components without breaking the existing app.
+
+
+🛠️ Types of Components in React
+
+There are mainly 2 types:
+
+1.Functional components
+2.Class components
