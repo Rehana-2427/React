@@ -10,3 +10,260 @@
 ---
 
 
+💡 What is State in React Class Components?
+In React, state is an object that holds data which can change over time and influences what gets rendered on the screen
+
+1. Class Component Without State
+
+class Counter extends Component {
+    render() {
+        return (
+            <div>
+                <h1>Count : 10</h1>
+            </div>
+        )
+    }
+}
+
+This component always renders a fixed count (10).
+
+There's no state, so the value does not change.
+
+It’s static – clicking or updating doesn’t re-render or update any value.
+
+
+2. Class Component With State
+     Class components manage state using this.state
+     
+     class Counter1 extends Component {
+    constructor(props) {
+        super(props)
+        this.state = { count: 10 }
+    }
+     increment = () => {
+        this.state.count += 1;
+        rootELe.render(<Counter1 />)//manually rendering here 
+    }
+    render() {
+        return (
+            <div>
+                <h1>State example in class components</h1>
+                <h3>Count: {this.state.count}</h3>
+                <button onClick={this.increment}>Increment</button>
+            </div>
+        )
+    }
+}
+
+rootELe.render(<Counter1 />)
+
+
+this.state.count += 1;
+rootELe.render(<Counter1 />);
+
+It is difficult to re-render manually ..so we have this.setState() -> it ensures to automatically re-rendering 
+this.setState() - takes updated state
+
+any changes to it should be done using this.setState() to trigger re-rendering.
+
+class Counter1 extends Component {
+    constructor(props) {
+        super(props)
+        this.state = { count: 10 }
+    }
+    increment = () => {
+        this.state.count += 1;
+        this.setState({count:this.state.count+1})
+    }
+    render() {
+        return (
+            <div>
+                <h1>State example in class components</h1>
+                <h3>Count: {this.state.count}</h3>
+                <button onClick={this.increment}>Increment</button>
+            </div>
+        )
+    }
+}
+
+rootELe.render(<Counter1 />)
+
+
+this.setState() is the correct way to update state.
+
+It schedules a re-render and updates the UI with the new count.
+
+Directly modifying state (this.state.count += 1) is not recommended – it won’t trigger a re-render reliably.
+
+this.setState() is the correct way—it handles updates efficiently and automatically.
+
+
+
+
+
+
+
+
+- Async nature of `setState`
+
+In React class components, this.setState() is asynchronous, 
+meaning the state does not update immediately after the function is called. 
+Instead, React batches multiple setState calls together for performance and schedules a re-render after the current execution cycle.
+
+Scenario:
+Imagine you're at a café. You tell the barista:
+
+"Please get me a coffee." ☕
+
+This is like calling:
+
+this.setState({ coffeeReady: true });
+Right after that, you immediately check your table and say:
+
+"Where is my coffee?! It's not here!" 😕
+
+This is like:
+console.log(this.state.coffeeReady); // false (old value)
+Why? Because the barista hasn't had time to prepare your coffee yet. They heard your request, added it to their queue, 
+and will bring it to you a little later. Just like React does with setState() — it queues the update, then later applies it.
+
+If you want to check your table after the coffee arrives, 
+you should wait for the barista to bring it and then look — that’s like using a callback:
+
+this.setState({ coffeeReady: true }, () => {
+  console.log("Coffee is ready!", this.state.coffeeReady); // true
+});
+
+() => acts as a callback function - React will invoke this function after it updates the state and re-renders the component.
+
+✅ What is a Callback Function?
+A callback function is a function that you pass as an argument to another function so it can be called later, 
+usually after some operation completes.
+
+Because setState() is asynchronous, this callback helps you do something only after the update is done.
+
+You can also use regular functions as callbacks:
+
+function afterUpdate() {
+  console.log("State updated!");
+}
+this.setState({ count: 5 }, afterUpdate);
+
+
+
+
+Lifecycle Methods: 
+
+✅ React Component Lifecycle (Class Components)
+A React component goes through 3 main phases in its lifecycle:
+
+1. Mounting Phase – When the component is being added to the DOM
+2. Updating Phase – When the component’s state or props change
+3. Unmounting Phase – When the component is removed from the DOM
+
+
+
+🔹 1. Mounting Phase
+Occurs once when the component is first rendered on the screen.
+
+Methods involved:
+
+constructor() → Initialize state
+
+render() → Returns JSX to display UI
+
+componentDidMount() → Called once after UI is mounted (i.e., shown in the browser)
+
+Code Explanation:
+
+Initializes the count state to 0.
+
+constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+}
+
+Returns the JSX (UI).
+
+render() {
+    return (
+        <div> ... </div>
+    );
+}
+
+Called once after the initial render. You can perform API calls or setup logic here.
+
+componentDidMount() {
+    console.log("component mounting");
+}
+
+
+🔹 2. Updating Phase
+Occurs every time the state or props are updated.
+
+Methods involved:
+
+render() → Gets called again with updated state
+
+componentDidUpdate(prevProps, prevState) → Runs after re-render
+
+Code Explanation:
+
+This updates the state and triggers a re-render.
+
+increment = () => {
+    this.setState({ count: this.state.count + 1 });
+}
+
+componentDidUpdate(prevProps, prevState) {
+    console.log("updated");
+    console.log(prevState); // Shows the previous count
+    console.log(this.state); // Shows the new count
+}
+
+Logs before and after state during update. This helps track changes.
+
+🔹 3. Unmounting Phase
+Occurs once when the component is removed from the DOM.
+
+Method involved:
+
+componentWillUnmount() → Cleanup logic (like clearing timers, canceling API requests)
+
+Code Explanation:
+
+componentWillUnmount() {
+    console.log("component will unmount");
+}
+
+function unmount() {
+    rootEle.render(
+        <div>
+            <h2>Component Unmounted</h2>
+            <button onClick={remount}>Remount</button>
+        </div>
+    );
+}
+
+This replaces your LifeCyclePhases component with a new one. React calls componentWillUnmount() before this replacement.
+
+
+🔁 What Happens Step-by-Step?
+App loads → constructor() → render() → componentDidMount()
+
+You click “Increment” → setState() → render() → componentDidUpdate()
+
+You click “UnMount” → componentWillUnmount() → component removed
+
+You click “Remount” → component mounted again → lifecycle repeats
+
+
+
+🧠 Notes:
+You should NOT manually call rootEle.render(<LifeCyclePhases />) inside increment(). 
+This causes full remount instead of a normal update.
+
+rootEle.render(<LifeCyclePhases />) // ❌ Not recommended in update logic
+Instead, just call:
+
+this.setState({ count: this.state.count + 1 }) // ✅ Correct
