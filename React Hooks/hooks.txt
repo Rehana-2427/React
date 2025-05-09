@@ -1,0 +1,56 @@
+
+## 🪝 **5. React Hooks (Modern React)**
+### 🔹 `useState`
+- Initial State & Lazy Initialization
+- Updating State
+- Async nature of `setState`
+- State Uplifting
+
+### 🔹 `useEffect`
+- Basic Syntax
+- Dependency Array
+- Cleanup Functions
+
+### 🔹 `useRef`
+- Managing Focus & DOM access
+- Storing mutable values
+
+### 🔹 `useCallback`
+- Memoizing Functions
+- Dependency List
+
+### 🔹 `useMemo`
+- Optimizing Computations
+
+### 🔹 `useImperativeHandle`
+- Customizing `ref` instances
+
+### 🔹 `forwardRef`
+- Forwarding Refs to Child Components
+
+### 🔹 Custom Hooks
+- Creating reusable hooks
+
+
+
+
+Hooks 
+
+Hooks are a plain javascript functions which can be written in functional components to manage state, handle side effects, and access other React features without needing class components.
+it follows some rules 
+-> it should call inside the component only 
+-> Every Hook should starts with "use" prefix
+-> Hooks can only be called at the top level of a component.
+-> Hooks cannot be conditional 
+
+Types of Hooks :
+Built in hooks
+useState
+useEffect
+useCallback
+useMemo
+useRef
+forwardRef
+useImperativeHandle
+
+Custom Hooks
