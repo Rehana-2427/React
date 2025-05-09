@@ -1,0 +1,307 @@
+### 🔹 `useEffect`
+- Basic Syntax
+- Dependency Array
+- Cleanup Functions 
+
+
+useEffect is a built in hooks just like useState 
+useEffect purpose is to execute side effects in a component(functional component)
+(side effect - interacting with outer world of the functional component)
+
+Example :
+
+✅ Scenario: WeatherApp Component Using Geolocation
+You're building a WeatherApp React component.
+
+Inside this component, you want to detect the user's current location using the Geolocation API.
+
+Based on the user's coordinates, you'll fetch the current weather report from a weather API (like OpenWeatherMap, WeatherAPI, etc.).
+
+🔁 Why this is a side effect?
+Because getting the user’s geolocation and then fetching weather data from an API involves interacting with:
+
+The browser (for geolocation)
+
+An external server/API (for weather)
+
+This is outside the pure rendering logic of the component — hence it's a side effect.
+
+That’s exactly why we use useEffect for this task — to run this code only after the component renders (and not during render).
+
+Getting geolocation - side effect - It talks to the browser (external system)
+Fetching weather using lat/lon - side effect -It calls an external API 
+Showing the weather on screen - no it is not side effect - Just rendering data = not a side effect 
+
+signature :
+
+useEffect hook atmost 2 paramters it should take .
+(callback,dependecy list) (callback - mandatory , dependecylist - optional)
+returns undefined
+
+useEFfect (()=>{
+    console.log("Inside useEffect")
+})
+
+
+It runs after the component renders.
+
+By default, it runs after every render (initial mount and updates) —
+
+🔹 Step 1: Initial Render (Mount)
+count is initialized to 10.
+
+Component renders UI:
+
+
+<h5>count: 10</h5>
+<button>Increment</button>
+After the DOM is painted, React calls the useEffect() function:
+
+
+console.log("inside useEffect"); // printed once
+✅ This is the first time useEffect runs (component mounted).
+
+🔹 Step 2: After Clicking “Increment”
+When you click the button:
+
+setCount((prev) => prev + 1);
+→ This updates count from 10 to 11.
+
+Component re-renders with updated state.
+
+React updates the DOM with:
+
+
+<h5>count: 11</h5>
+After this update, React again calls useEffect():
+
+
+console.log("inside useEffect"); // printed again
+✅ This is the second time useEffect runs (component updated).
+
+🔁 Why Does It Run Every Time?
+Because you didn’t pass any dependency array ([]) to useEffect, React will run the effect:
+
+After initial mount
+
+After every re-render
+
+This is the default behavior of useEffect()
+
+
+✳️ How to Control useEffect ---here concept dependency array -> control it with a dependency array.
+
+Run only once (on mount): 
+useEffect(() => {
+  console.log("Runs once");
+}, []);
+
+Run only when specific state changes:
+useEffect(() => {
+  console.log("Runs only when count changes");
+}, [count]);
+
+useEffect(() => {})	After every render
+useEffect(() => {}, [])	Only once (after initial mount)
+useEffect(() => {}, [count])	After mount + whenever count changes
+
+
+✅ What is Conditional Execution with useEffect?
+useEffect lets you conditionally execute code (side effects) based on what data (state/props) changed.
+
+You control when the effect runs using the dependency array — and that’s what enables conditional behavior.
+
+🧠 How It Works
+Each useEffect(() => { ... }, [dependencies]):
+
+Runs after the render
+
+Compares current values of dependencies (count, age, etc.)
+
+If any dependency has changed since the last render, then the effect block is executed
+
+So it's like saying:
+
+"Hey React, only run this code if count or age changes."
+
+💡 How Conditional Behavior Helps Rendering
+You can use useEffect to:
+
+1. Run code only when specific data changes
+E.g., show a congratulatory message only when count reaches 100:
+
+useEffect(() => {
+  if (count === 100) {
+    alert("🎉 You reached 100!");
+  }
+}, [count]);
+2. Make API calls conditionally
+E.g., fetch new data only when user ID changes:
+useEffect(() => {
+  fetch(`/api/user/${userId}`).then(...);
+}, [userId]);
+3. Toggle classes or themes
+useEffect(() => {
+  document.body.className = theme; // 'dark' or 'light'
+}, [theme]);
+
+
+example :
+
+const DependecnyList = () => {
+    const[count,setCount] = useState(10)
+    const[age,setAge] = useState(23)
+    //dependecncy list is empty
+    useEffect(()=>{
+        console.log("inside useEffect")
+    },[])
+    useEffect(()=>{
+        
+        console.log("count changed ")
+    },[count])
+    useEffect(()=>{
+        
+        console.log("age changed")
+    },[age])
+    useEffect(()=>{
+        debugger
+        console.log("age or count changed")
+    },[age,count])
+    const handleIncrement = () =>{
+        setCount((prev)=>{
+            return (prev+1)
+        })
+    }
+  return (
+    <div>
+        <h1>useEffect Hook</h1>
+        <h5>count{count}</h5>
+        <button onClick={handleIncrement}>Increment</button>
+        <h5>Age: {age}</h5> 
+        <button onClick={()=>setAge(age+1)}>Update</button>
+    </div>
+  )
+}
+On First Render:
+All the following effects run:
+useEffect(() => {}, [])             // always runs once (initial mount)
+useEffect(() => {}, [count])        // count = 10 → runs
+useEffect(() => {}, [age])          // age = 23 → runs
+useEffect(() => {}, [count, age])   // both tracked → runs
+
+On Clicking "Increment" (count becomes 11):
+useEffect(() => {}, [count])        // runs ✔️
+useEffect(() => {}, [count, age])   // count changed → runs ✔️
+age did not change, so the [age] effect doesn't run.
+
+On Clicking "Update" (age becomes 24):
+useEffect(() => {}, [age])          // runs ✔️
+useEffect(() => {}, [count, age])   // age changed → runs ✔️
+
+
+
+🔍 Conditional Rendering vs Conditional Effects
+Conditional rendering is:
+if (something) { return <Component /> }
+
+Conditional effects using useEffect:
+if (something) { do side effect } (after rendering)
+
+Example:
+
+useEffect(() => {
+  if (count > 5) {
+    alert("Count is high!");
+  }
+}, [count]);
+This doesn’t affect what is rendered, but it reacts to what changed.
+
+
+
+- Cleanup Functions 
+import React, { useEffect } from 'react'
+
+const UpdateUnmount = () => {
+  useEffect(() => {
+    console.log("component mounted"); // side effect during mounting
+
+    return () => {
+      console.log("clean up function"); // cleanup on unmount
+    };
+  }, []); // empty dependency list
+
+  return (
+    <div>
+      <p>App Component</p>
+    </div>
+  );
+};
+
+export default UpdateUnmount;
+✅ Step-by-Step Explanation
+🔹 1. Mounting Phase (Initial Render)
+When the component is mounted (i.e., added to the DOM):
+
+React renders the <p>App Component</p>
+
+Then it runs your useEffect hook since the dependency list is [] (only run once, on mount)
+
+Inside that hook:
+
+"component mounted" is printed to the console
+
+✔️ So output:component mounted
+🔹 2. Updating Phase (Re-render)
+Because the dependency array is empty [], this useEffect will not run again during updates. So:
+
+Even if props/state change (though you have none here), this effect is not re-executed
+
+No "component mounted" again
+
+No "cleanup function" during updates
+
+🔹 3. Unmounting Phase (Component Removed)
+When the component is about to be removed from the DOM (like navigating to another page, conditionally hiding the component, etc.):
+
+React calls the cleanup function returned by useEffect
+
+This logs "clean up function" to the console
+
+✔️ So output: clean up function
+ 🧠 Why Use a Cleanup Function?
+Cleanup is important when:
+
+You set up subscriptions
+
+You start a timer or interval
+
+You add event listeners
+
+You make a network request that should be canceled
+
+You want to log or clean memory
+
+Example: Cleanup for setInterval
+
+useEffect(() => {
+  const intervalId = setInterval(() => {
+    console.log("Tick...");
+  }, 1000);
+
+  return () => {
+    clearInterval(intervalId); // cleanup
+    console.log("Interval cleared");
+  };
+}, []);
+
+
+🔄 Class Component Comparison
+In class components:
+
+componentDidMount() ➝ like useEffect(..., [])
+
+componentWillUnmount() ➝ like the cleanup function
+
+Mounting	useEffect runs → "component mounted"
+Updating	useEffect doesn’t re-run (due to [])
+Unmounting	cleanup function runs → "clean up function"
