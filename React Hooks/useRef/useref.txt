@@ -1,0 +1,18 @@
+### 🔹 `useRef`
+- Managing Focus & DOM access
+- Storing mutable values
+
+useRef -> 
+it is uses reference (heap memory reference)
+non-primitive data types store in heap memory, instead of holding data directly it holds address(memory reference)
+
+inside a functional component ,when we create a non primitive data that data can be hold only one reference throughout the life cycle of functional component 
+
+useRef  uses 
+to access real DOM elements
+to add custom event listeners on real DOM elements
+mutations
+
+
+in react for every elements  one attribute is there called ref 
+ref=> takes object (ref{current:value})
